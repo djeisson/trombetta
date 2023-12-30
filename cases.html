@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Css-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+    <!--icones-->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!--Animação-->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Trombetta Automação -Soluções em automação industrial</title>
+</head>
+<body>
+    <!--header-->
+    <div class="bg-header">
+        <header>
+            <nav class="container">
+                <div class="icons-header" data-aos="fade-down">
+                    <a href="#">
+                        <i class="fa-brands fa-instagram fa-2x"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-brands fa-linkedin fa-2x"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-brands fa-whatsapp fa-2x"></i>
+                    </a>
+                </div>
+                <div class="logo-header" data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000">
+                    <img src="assets/logoheader-removebg-preview.png" alt="">
+                </div>
+                <div class="links-header" data-aos="fade-down">
+                    <a href="index.html">Home</a>
+                    <a href="index.html">Sobre</a>
+                    <a href="#">Cases</a>
+                </div>
+                <div class="menu-mobile">
+                    <button onClick='abrirMenu()'>
+                        <img src="assets/cardapio.png" alt="">
+                    </button>
+                </div>
+                <div id="menuMobile"  class="links-header-mobile">
+                    <button onClick="fechar()">X</button>
+                    <a href="index.html">Home</a>
+                    <a href="index.html">Sobre</a>
+                    <a href="cases.html">Cases</a>
+                    <div class="icons-header-mobile">
+                        <a href="#">
+                            <i class="fa-brands fa-instagram fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-linkedin fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-whatsapp fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>  
+            <section class="description-header" data-aos="zoom-in">
+                <h1>
+                    Cases
+                </h1>
+                <span>
+                    Trabalhamos com as melhores e mais modernas tecnologias para entregar eficiência para a industria
+                </span>
+            </section>        
+        </header>
+    </div>
+    <!--cases-->
+    <div class="container">
+        <div class="cases-sextion">
+            <span>
+                Industria 4.0
+            </span>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus repudiandae fuga necessitatibus commodi quaerat quam magnam omnis ad laboriosam quibusdam, itaque dicta voluptate doloremque error ab eligendi modi excepturi?
+            </p>
+            <div class="img-cases-pg">
+                <img src="https://static.tildacdn.com/tild3539-6539-4832-a466-333237623137/image.png" alt="img-case">
+                <img src="https://www.ceramicagalassia.com/public/industry-1170.png" alt="img-case">
+                <img src="https://www.advancedtech.com/wp-content/uploads/2022/04/iStock-1184804468-1.png" alt="img-case">
+                <img src="https://dc-gb.resource.bosch.com/media/gb/training_8/29191_w734.png" alt="img-case">
+                <img src="https://www.ceramicagalassia.com/public/industry-1170.png" alt="img-case">
+            </div>
+        </div>
+        <div class="cases-sextion">
+            <span>
+                Sistema de pesagem
+            </span>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus repudiandae fuga necessitatibus commodi quaerat quam magnam omnis ad laboriosam quibusdam, itaque dicta voluptate doloremque error ab eligendi modi excepturi?
+            </p>
+            <div class="img-cases-pg">
+                <img src="https://www.airproducts.com/-/media/images/1440x810/masthead/469097119-piping-system_page_header_16x9.jpg?as=0&w=1439&hash=A6E4FFC88CDAE14627E17F3B26ADAF06" alt="img-case">
+                <img src="https://www.airproducts.com/-/media/images/1440x810/masthead/469097119-piping-system_page_header_16x9.jpg?as=0&w=1439&hash=A6E4FFC88CDAE14627E17F3B26ADAF06" alt="img-case">
+                <img src="https://www.airproducts.com/-/media/images/1440x810/masthead/469097119-piping-system_page_header_16x9.jpg?as=0&w=1439&hash=A6E4FFC88CDAE14627E17F3B26ADAF06" alt="img-case">
+                <img src="https://www.airproducts.com/-/media/images/1440x810/masthead/469097119-piping-system_page_header_16x9.jpg?as=0&w=1439&hash=A6E4FFC88CDAE14627E17F3B26ADAF06" alt="img-case">
+                <img src="https://www.airproducts.com/-/media/images/1440x810/masthead/469097119-piping-system_page_header_16x9.jpg?as=0&w=1439&hash=A6E4FFC88CDAE14627E17F3B26ADAF06" alt="img-case">
+            </div>
+        </div>
+        <div class="cases-sextion">
+            <span>
+                Sistema de posicionamento
+            </span>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus repudiandae fuga necessitatibus commodi quaerat quam magnam omnis ad laboriosam quibusdam, itaque dicta voluptate doloremque error ab eligendi modi excepturi?
+            </p>
+            <div class="img-cases-pg">
+                <img src="https://itr.group/wp-content/uploads/2022/01/14.png" alt="img-case">
+                <img src="https://www.europeanbusinessreview.com/wp-content/uploads/2023/09/Foundational-capabilities.png" alt="img-case">
+                <img src="https://static.tildacdn.com/tild3863-3937-4636-a262-613533633534/MV.png" alt="img-case">
+                <img src="https://itr.group/wp-content/uploads/2022/01/14.png" alt="img-case">
+                <img src="https://www.europeanbusinessreview.com/wp-content/uploads/2023/09/Foundational-capabilities.png" alt="img-case">
+            </div>
+        </div>
+        <div class="cases-sextion">
+            <span>
+                Programação CLP
+            </span>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus repudiandae fuga necessitatibus commodi quaerat quam magnam omnis ad laboriosam quibusdam, itaque dicta voluptate doloremque error ab eligendi modi excepturi?
+            </p>
+            <div class="img-cases-pg">
+                <img src="https://www.greensofttech.com/wp-content/uploads/2022/05/shutterstock_208141396-600.png" alt="img-case">
+                <img src="https://openeeg.sourceforge.net/doc/modeeg/Modification/modeeg16/ModularEEG16Ch.brd.png" alt="img-case">
+                <img src="https://rmtproje.com/img/uzman/otomasyon.png" alt="img-case">
+                <img src="https://www.greensofttech.com/wp-content/uploads/2022/05/shutterstock_208141396-600.png" alt="img-case">
+                <img src="https://rmtproje.com/img/uzman/otomasyon.png" alt="img-case">
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <footer class="footer">
+        <img src="assets/Ativo 2TROMBETA_AUTO02.png" alt="">
+        <h3>email@email.com.br</h3>
+        <h3>(46) 9999-9999</h3>
+        <span>Trombetta Automação - Todos os direitos reservados 2024 &copy;</span>
+    </footer>
+</body>
+<script src="script.js"></script>
+</html>
