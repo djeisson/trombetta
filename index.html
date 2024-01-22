@@ -19,14 +19,14 @@
         <header>
             <nav class="container">
                 <div class="icons-header" data-aos="fade-down">
-                    <a href="#">
-                        <i class="fa-brands fa-instagram fa-2x"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-brands fa-linkedin fa-2x"></i>
-                    </a>
                     <a href="https://wa.me/554699711266" target="_blank">
                         <i class="fa-brands fa-whatsapp fa-2x"></i>
+                    </a>
+                    <a href="https://wa.me/554699711266" target="_blank">
+                        <i class="fa-brands fa-instagram fa-2x"></i>
+                    </a>
+                    <a href="https://wa.me/554699711266" target="_blank">
+                        <i class="fa-brands fa-linkedin fa-2x"></i>
                     </a>
                 </div>
                 <div class="logo-header" data-aos="flip-left"
@@ -46,17 +46,12 @@
                 </div>
                 <div id="menuMobile"  class="links-header-mobile">
                     <button onClick="fechar()">X</button>
+                    <img class="img-menu-mobile" src="assets/Ativo 2TROMBETA_AUTO02.png" alt="">
                     <a href="#">Home</a>
                     <a href="#">Sobre</a>
                     <a href="cases.html">Cases</a>
                     <div class="icons-header-mobile">
-                        <a href="#">
-                            <i class="fa-brands fa-instagram fa-2x"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-brands fa-linkedin fa-2x"></i>
-                        </a>
-                        <a href="#">
+                        <a href="https://wa.me/554699711266">
                             <i class="fa-brands fa-whatsapp fa-2x"></i>
                         </a>
                     </div>
@@ -121,7 +116,7 @@
             <div class="case">
                 <img src="https://avatars.mds.yandex.net/i?id=b4e3a65189e985feb6560a2d6c8445c24c251e05-10332876-images-thumbs&n=13" alt="">
                 <div class="cases-info">
-                    <span>Sistema de posicionamento</span>
+                    <span>Sistema de posição</span>
                     <a href="cases.html">Saiba mais</a>
                 </div>
             </div>
@@ -135,7 +130,28 @@
             <div class="case">
                 <img src="https://avatars.mds.yandex.net/i?id=f93cc13735b51cd46ed39b1ab450ce4689fd800f-10108140-images-thumbs&n=13" alt="">
                 <div class="cases-info">
-                    <span>Programação CLP</span>
+                    <span>Programação</span>
+                    <a href="cases.html">Saiba mais</a>
+                </div>
+            </div>
+            <div class="case">
+                <img src="https://avatars.mds.yandex.net/i?id=f93cc13735b51cd46ed39b1ab450ce4689fd800f-10108140-images-thumbs&n=13" alt="">
+                <div class="cases-info">
+                    <span>Comércio de Materiais </span>
+                    <a href="cases.html">Saiba mais</a>
+                </div>
+            </div>
+            <div class="case">
+                <img src="https://avatars.mds.yandex.net/i?id=f93cc13735b51cd46ed39b1ab450ce4689fd800f-10108140-images-thumbs&n=13" alt="">
+                <div class="cases-info">
+                    <span>Retroffit</span>
+                    <a href="cases.html">Saiba mais</a>
+                </div>
+            </div>
+            <div class="case">
+                <img src="https://avatars.mds.yandex.net/i?id=f93cc13735b51cd46ed39b1ab450ce4689fd800f-10108140-images-thumbs&n=13" alt="">
+                <div class="cases-info">
+                    <span>NR10 e NR12</span>
                     <a href="cases.html">Saiba mais</a>
                 </div>
             </div>
@@ -207,28 +223,24 @@
             <h2>Entre em contato</h2>
             <div class="icons-contato">
                 <a href="#">
-                    <i class="fa-brands fa-instagram fa-2x"></i>
-                </a>
-                <a href="#">
-                    <i class="fa-brands fa-linkedin fa-2x"></i>
-                </a>
                 <a href="https://wa.me/554699711266" target="_blank">
                     <i class="fa-brands fa-whatsapp fa-2x"></i>
-                </a>
-                <a href="#">
-                    <i class="fa-regular fa-envelope fa-2x"></i>
                 </a>
             </div>
             <hr>
             <h2>Ou nos envie uma mensagem</h2>
-            <form class="form" action="">
+            <form class="form" action="https://formsubmit.co/comercial@trombetta.tec.br" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html">
                 <label data-aos="fade-right" for="">Email</label>
-                <input data-aos="fade-right" type="email" required>
+                <input type="mail" name="E-mail" required data-aos="fade-right" type="email" required>
                 <label data-aos="fade-right" for="">Nome</label>
-                <input data-aos="fade-right" type="text">
+                <input type="text" name="Nome" data-aos="fade-right" required>
                 <label data-aos="fade-right" for="">Telefone</label>
-                <input type="number">
-                <button>Enviar</button>
+                <input type="number" name="Telefone" required>
+                <label data-aos="fade-right" for="">Descrição</label>
+                <textarea name="Descrição" id="input-text" cols="30" rows="10" required></textarea>
+                <button type="submit">Enviar</button>
             </form>
 
         </div>
@@ -245,6 +257,9 @@
     </footer>
     
     <a href="https://wa.me/554699711266" target="_blank"><img src="assets/whatsapp.png" alt="whatsapp" class="whats"></a>
+    <!--
+    <a href="index.html"><img src="assets/de-volta-ao-topo.png" alt="topo" class="topo"></a>
+    -->
 </body>
 <script src="script.js" defer></script>
 </html>
