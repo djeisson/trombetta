@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trombetta Automação | Soluções em Automação Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Cores originais */
+  --navy:#0D2137;
+  --navy2:#102A45;
+  --blue:#1A4A7A;
+  --blue2:#1E5FA0;
+  --blue-mid:#2A7AB8;
+  /* Cores complementares */
+  --sky:#EAF3FB;
+  --sky2:#D4E8F5;
+  --white:#FFFFFF;
+  --gray:#F5F7FA;
+  --gray2:#EEF1F5;
+  --border:#D8E4EF;
+  --border2:#C0D4E8;
+  /* Accent - laranja para CTA (mantido do original) */
+  --orange:#E85D04;
+  --orange2:#F48C06;
+  --orange-glow:rgba(232,93,4,0.15);
+  --orange-pale:rgba(232,93,4,0.08);
+  /* Textos */
+  --text-dark:#0D2137;
+  --text-mid:#2A4A6A;
+  --text-light:#5A7A9A;
+  --text-muted:#8AA5BE;
+  /* Fontes */
+  --font-display:'Barlow Condensed',sans-serif;
+  --font-body:'Barlow',sans-serif;
+  --nav-h:72px;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;
+  background:var(--navy);
+  transition:box-shadow 0.4s var(--ease),height 0.3s;
+}
+nav.scrolled{
+  box-shadow:0 2px 20px rgba(13,33,55,0.18);
+  height:62px;
+}
+.nav-logo{display:flex;align-items:center;gap:0.75rem}
+.nav-logo-icon{
+  width:36px;height:36px;background:var(--orange);
+  border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1rem;font-weight:700;color:#fff;flex-shrink:0;
+}
+.nav-logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#fff}
+.nav-logo-text span{display:block;font-size:0.58rem;letter-spacing:0.18em;color:rgba(255,255,255,0.5);font-family:var(--font-body);font-weight:400;text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none}
+.nav-links a{
+  font-size:0.85rem;font-weight:500;color:rgba(255,255,255,0.75);
+  letter-spacing:0.05em;text-transform:uppercase;
+  position:relative;transition:color 0.2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;
+  background:var(--orange);transition:width 0.3s var(--ease);
+}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.btn-nav{
+  padding:0.55rem 1.4rem;
+  background:var(--orange);color:#fff;
+  border-radius:6px;font-size:0.8rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  transition:all 0.2s;
+}
+.btn-nav:hover{background:#c94e02;transform:translateY(-1px);box-shadow:0 4px 16px var(--orange-glow)}
+.hamburger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer;padding:2px}
+.hamburger span{height:2px;background:#fff;transition:all 0.3s var(--ease);transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:var(--navy);z-index:99;
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;transform:translateY(-12px);
+  transition:opacity 0.3s var(--ease),transform 0.3s var(--ease);
+}
+.mobile-menu.open{opacity:1;transform:translateY(0)}
+.mobile-menu a{font-family:var(--font-display);font-size:2rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff}
+.mobile-menu .btn-nav{font-size:1rem;padding:0.8rem 2.5rem}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding-top:var(--nav-h);
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 50%,var(--blue) 100%);
+}
+.grid-overlay{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+}
+.hero-glow{
+  position:absolute;right:-10%;top:10%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,74,122,0.5) 0%,transparent 70%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;
+  padding:4rem 5%;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.4rem 1rem;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;
+  font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,255,255,0.8);margin-bottom:1.5rem;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,4.5vw,4rem);
+  font-weight:700;line-height:1.06;
+  letter-spacing:0.02em;text-transform:uppercase;
+  color:#fff;margin-bottom:1.25rem;
+}
+.hero h1 em{color:var(--orange);font-style:normal}
+.hero-sub{
+  font-size:1.05rem;color:rgba(255,255,255,0.7);
+  line-height:1.8;max-width:480px;margin-bottom:2.5rem;font-weight:300;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-primary{
+  padding:0.9rem 2rem;
+  background:var(--orange);color:#fff;border-radius:6px;
+  font-size:0.875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  transition:all 0.25s var(--ease);
+  box-shadow:0 4px 24px var(--orange-glow);
+}
+.btn-primary:hover{background:#c94e02;transform:translateY(-2px);box-shadow:0 8px 32px rgba(232,93,4,0.35)}
+.btn-ghost{
+  padding:0.9rem 1.75rem;
+  border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85);
+  border-radius:6px;font-size:0.875rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  transition:all 0.25s;
+}
+.btn-ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,0.08)}
+.hero-stats{
+  display:flex;gap:2.5rem;margin-top:3rem;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,0.12);
+}
+.hero-stat .num{
+  font-family:var(--font-display);font-size:2.2rem;font-weight:700;
+  color:#fff;letter-spacing:0.02em;
+}
+.hero-stat .num em{color:var(--orange);font-style:normal}
+.hero-stat .lbl{font-size:0.7rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase}
+.hero-visual{position:relative}
+.hero-box{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;padding:2rem;
+  backdrop-filter:blur(8px);
+}
+.hero-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--orange),transparent);
+  border-radius:16px 16px 0 0;
+}
+.hv-title{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1.25rem;font-weight:500}
+.hv-items{display:flex;flex-direction:column;gap:0.75rem}
+.hv-item{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.75rem 1rem;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;font-size:0.875rem;color:rgba(255,255,255,0.8);
+}
+.hv-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.hv-dot.green{background:#22c55e}
+.hv-dot.orange{background:var(--orange2)}
+.hv-line{display:flex;justify-content:space-between;width:100%}
+.hv-line strong{color:#fff;font-weight:500}
+.hv-line span{font-size:0.72rem;color:rgba(255,255,255,0.4)}
+.hero-float{
+  position:absolute;bottom:-16px;right:-16px;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;padding:1rem 1.25rem;
+  box-shadow:0 8px 32px rgba(13,33,55,0.15);
+}
+.hero-float .f-val{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--orange)}
+.hero-float .f-lbl{font-size:0.68rem;color:var(--text-light);letter-spacing:0.06em;text-transform:uppercase}
+
+/* ── SECTIONS ── */
+.section-inner{max-width:1200px;margin:0 auto;padding:7rem 5%}
+.eyebrow{
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--blue2);font-weight:600;margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--orange)}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,3.2vw,2.9rem);
+  font-weight:700;text-transform:uppercase;
+  letter-spacing:0.04em;color:var(--navy);
+  line-height:1.1;margin-bottom:1rem;
+}
+.section-title em{color:var(--blue2);font-style:normal}
+.divider{width:40px;height:3px;background:var(--orange);margin:1.5rem 0;border-radius:2px}
+
+/* ── SOBRE ── */
+.sobre{background:var(--white)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem}
+.sobre-visual{
+  background:linear-gradient(135deg,var(--sky) 0%,var(--sky2) 100%);
+  border:1px solid var(--border);
+  border-radius:16px;padding:3rem;
+  position:relative;overflow:hidden;min-height:360px;
+  display:flex;align-items:center;justify-content:center;
+}
+.sobre-visual::after{
+  content:'';position:absolute;bottom:-20px;right:-20px;
+  width:180px;height:180px;
+  background:radial-gradient(circle,rgba(26,95,160,0.12) 0%,transparent 70%);
+}
+.sobre-visual svg{stroke:var(--blue2);opacity:0.35}
+.sobre-tag{
+  position:absolute;top:1.25rem;right:1.25rem;
+  font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--blue2);border:1px solid var(--border2);
+  padding:0.35rem 0.75rem;border-radius:100px;font-weight:600;
+  background:var(--white);
+}
+.sobre-text{font-size:1rem;color:var(--text-mid);line-height:1.85;margin-bottom:1.25rem;font-weight:400}
+.sobre-pills{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.75rem}
+.pill{
+  padding:0.4rem 1rem;
+  background:var(--sky);border:1px solid var(--border2);
+  border-radius:100px;font-size:0.78rem;color:var(--blue2);font-weight:500;
+  transition:all 0.2s;
+}
+.pill:hover{background:var(--blue2);color:#fff;border-color:var(--blue2)}
+.sobre-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.sobre-card{
+  background:var(--gray);border:1px solid var(--border);
+  border-radius:12px;padding:1.25rem;text-align:center;
+  transition:all 0.3s var(--ease);
+}
+.sobre-card:hover{border-color:var(--blue2);background:var(--sky);transform:translateY(-3px);box-shadow:0 8px 28px rgba(26,74,122,0.1)}
+.sobre-card .num{font-family:var(--font-display);font-size:1.9rem;font-weight:700;color:var(--navy)}
+.sobre-card .lbl{font-size:0.7rem;color:var(--text-light);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.25rem}
+
+/* ── DIFERENCIAIS ── */
+.difs{background:var(--gray)}
+.dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.dif-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:2rem 1.75rem;
+  position:relative;overflow:hidden;
+  transition:all 0.35s var(--ease);
+}
+.dif-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--orange);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s var(--ease);
+}
+.dif-card:hover::before{transform:scaleX(1)}
+.dif-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(13,33,55,0.1)}
+.dif-icon{
+  width:52px;height:52px;background:var(--sky);
+  border:1px solid var(--border2);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;
+}
+.dif-icon svg{width:26px;height:26px;stroke:var(--blue2)}
+.dif-card h3{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem}
+.dif-card p{font-size:0.875rem;color:var(--text-light);line-height:1.75}
+
+/* ── SERVIÇOS ── */
+.servicos{background:var(--white)}
+.servicos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem}
+.srv-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;cursor:pointer;
+  transition:all 0.35s var(--ease);
+}
+.srv-card:hover{border-color:var(--blue2);transform:translateY(-6px);box-shadow:0 20px 50px rgba(13,33,55,0.12)}
+.srv-img{
+  height:140px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--sky) 0%,var(--sky2) 100%);
+  position:relative;
+}
+.srv-img svg{width:54px;height:54px;stroke:var(--blue-mid);opacity:0.5;transition:all 0.3s}
+.srv-card:hover .srv-img svg{opacity:1;stroke:var(--navy)}
+.srv-stripe{
+  height:3px;
+  background:linear-gradient(90deg,var(--orange),var(--orange2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s var(--ease);
+}
+.srv-card:hover .srv-stripe{transform:scaleX(1)}
+.srv-body{padding:1.25rem}
+.srv-body h3{
+  font-family:var(--font-display);font-size:1rem;font-weight:700;
+  color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem;
+}
+.srv-body p{font-size:0.8rem;color:var(--text-light);line-height:1.6}
+.srv-link{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.72rem;font-weight:700;color:var(--orange);
+  letter-spacing:0.08em;text-transform:uppercase;margin-top:0.75rem;
+  transition:gap 0.2s;
+}
+.srv-card:hover .srv-link{gap:0.7rem}
+
+/* ── PROCESSO ── */
+.processo{background:var(--navy)}
+.processo .eyebrow{color:rgba(255,255,255,0.5)}
+.processo .eyebrow::before{background:var(--orange)}
+.processo .section-title{color:#fff}
+.processo .section-title em{color:var(--orange)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;position:relative}
+.proc-grid::before{
+  content:'';position:absolute;top:27px;left:calc(12.5% + 1.5rem);right:calc(12.5% + 1.5rem);
+  height:1px;background:rgba(255,255,255,0.1);z-index:0;
+}
+.proc-item{text-align:center;position:relative;z-index:1}
+.proc-num{
+  width:54px;height:54px;border-radius:50%;
+  background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1.2rem;font-weight:700;
+  color:rgba(255,255,255,0.4);margin:0 auto 1.25rem;
+  transition:all 0.4s;
+}
+.proc-item.active .proc-num{
+  border-color:var(--orange);color:var(--orange);
+  background:rgba(232,93,4,0.1);
+  box-shadow:0 0 0 8px rgba(232,93,4,0.08);
+}
+.proc-item h3{
+  font-family:var(--font-display);font-size:1rem;font-weight:700;
+  color:#fff;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;
+}
+.proc-item p{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.7;max-width:200px;margin:0 auto}
+
+/* ── CLIENTES ── */
+.clientes{background:var(--gray)}
+.clients-wrap{overflow:hidden;margin-top:3rem;position:relative}
+.clients-wrap::before,.clients-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;
+}
+.clients-wrap::before{left:0;background:linear-gradient(90deg,var(--gray),transparent)}
+.clients-wrap::after{right:0;background:linear-gradient(-90deg,var(--gray),transparent)}
+.clients-track{
+  display:flex;gap:1.5rem;align-items:center;
+  animation:scroll 24s linear infinite;width:max-content;
+}
+.clients-track:hover{animation-play-state:paused}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.client-logo{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1rem 2rem;
+  font-family:var(--font-display);font-size:1rem;font-weight:600;
+  color:var(--text-light);letter-spacing:0.08em;text-transform:uppercase;
+  white-space:nowrap;transition:all 0.2s;min-width:150px;text-align:center;
+}
+.client-logo:hover{border-color:var(--blue2);color:var(--navy);box-shadow:0 4px 16px rgba(13,33,55,0.08)}
+
+/* ── DEPOIMENTOS ── */
+.depoimentos{background:var(--white)}
+.dep-carousel{position:relative;margin-top:3.5rem;overflow:hidden}
+.dep-track{display:flex;transition:transform 0.6s var(--ease)}
+.dep-card{min-width:100%}
+.dep-inner{
+  max-width:700px;margin:0 auto;
+  background:var(--gray);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;
+}
+.dep-inner::before{
+  content:'"';
+  position:absolute;top:-0.5rem;left:1.5rem;
+  font-family:var(--font-display);font-size:8rem;font-weight:700;
+  color:rgba(26,74,122,0.06);line-height:1;
+}
+.dep-stripe{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--orange),var(--orange2));
+  border-radius:20px 20px 0 0;
+}
+.dep-stars{color:var(--orange2);letter-spacing:2px;margin-bottom:1.25rem;font-size:0.9rem}
+.dep-text{
+  font-family:var(--font-display);font-size:1.25rem;font-weight:400;
+  color:var(--navy);line-height:1.6;margin-bottom:2rem;
+  font-style:italic;position:relative;z-index:1;
+}
+.dep-author{display:flex;align-items:center;gap:1rem}
+.dep-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--navy));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:0.85rem;color:#fff;flex-shrink:0;
+}
+.dep-name strong{display:block;font-size:0.9rem;font-weight:600;color:var(--navy)}
+.dep-name span{font-size:0.78rem;color:var(--text-light)}
+.dep-dots{display:flex;gap:0.5rem;justify-content:center;margin-top:2rem}
+.dep-dots button{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border2);transition:all 0.3s;
+}
+.dep-dots button.active{background:var(--orange);width:24px;border-radius:4px}
+.dep-arrows{display:flex;gap:0.75rem;justify-content:center;margin-top:1rem}
+.dep-arrows button{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--border);color:var(--text-light);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  transition:all 0.2s;
+}
+.dep-arrows button:hover{border-color:var(--navy);color:var(--navy);background:var(--sky)}
+
+/* ── CONTATO ── */
+.contato{background:var(--gray)}
+.contato-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.contato-info h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--navy);margin-bottom:1rem}
+.contato-info p{font-size:0.95rem;color:var(--text-mid);line-height:1.8;margin-bottom:2rem}
+.c-items{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.c-item{display:flex;align-items:center;gap:0.9rem;font-size:0.9rem;color:var(--text-mid)}
+.c-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--sky);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.c-icon svg{width:18px;height:18px;stroke:var(--blue2)}
+.social-row{display:flex;gap:0.75rem}
+.social-btn{
+  width:40px;height:40px;border-radius:8px;
+  border:1px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.social-btn svg{width:18px;height:18px;stroke:var(--text-light);transition:stroke 0.2s}
+.social-btn:hover{border-color:var(--navy);background:var(--sky)}
+.social-btn:hover svg{stroke:var(--navy)}
+.form-box{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:2.5rem;
+  box-shadow:0 4px 32px rgba(13,33,55,0.06);
+}
+.form-box-stripe{
+  height:3px;background:linear-gradient(90deg,var(--navy),var(--blue2));
+  margin:-2.5rem -2.5rem 2rem;border-radius:16px 16px 0 0;
+}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.f-full{grid-column:1/-1}
+.f-group{display:flex;flex-direction:column;gap:0.4rem}
+.f-group label{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light)}
+.f-group input,.f-group select,.f-group textarea{
+  padding:0.8rem 1rem;
+  background:var(--gray);border:1px solid var(--border);border-radius:8px;
+  font-family:var(--font-body);font-size:0.9rem;color:var(--navy);
+  transition:all 0.2s;outline:none;-webkit-appearance:none;
+}
+.f-group input::placeholder,.f-group textarea::placeholder{color:var(--text-muted)}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{
+  border-color:var(--blue2);background:var(--white);
+  box-shadow:0 0 0 3px rgba(26,95,160,0.1);
+}
+.f-group input.error,.f-group select.error,.f-group textarea.error{border-color:#ef4444}
+.f-group textarea{resize:vertical;min-height:100px}
+.f-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7A9A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer;
+}
+.ferr{font-size:0.72rem;color:#ef4444;display:none;margin-top:0.15rem}
+.ferr.show{display:block}
+.btn-submit{
+  width:100%;padding:1rem;
+  background:var(--navy);color:#fff;border-radius:8px;
+  font-size:0.875rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  margin-top:0.5rem;
+  transition:all 0.25s var(--ease);
+}
+.btn-submit:hover:not(:disabled){background:var(--blue);transform:translateY(-2px);box-shadow:0 8px 28px rgba(13,33,55,0.2)}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed}
+.form-success{display:none;text-align:center;padding:3rem 2rem}
+.form-success.show{display:block}
+.form-success svg{width:60px;height:60px;stroke:var(--blue2);margin:0 auto 1rem}
+.map-wrapper{margin-top:2rem;border-radius:12px;overflow:hidden;border:1px solid var(--border);height:260px}
+.map-wrapper iframe{width:100%;height:100%;border:0}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:4rem 5% 2rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;
+  padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:2rem;
+}
+.f-brand .logo{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem}
+.f-brand .logo-icon{
+  width:36px;height:36px;background:var(--orange);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:700;color:#fff;font-size:1rem;
+}
+.f-brand .logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff}
+.f-brand p{font-size:0.875rem;color:rgba(255,255,255,0.4);line-height:1.8;max-width:260px;margin-bottom:1.25rem}
+.f-social{display:flex;gap:0.6rem}
+.f-social a{
+  width:36px;height:36px;border-radius:6px;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;transition:all 0.2s;
+}
+.f-social a svg{width:16px;height:16px;stroke:rgba(255,255,255,0.4);transition:stroke 0.2s}
+.f-social a:hover{border-color:var(--orange);background:rgba(232,93,4,0.1)}
+.f-social a:hover svg{stroke:var(--orange)}
+footer h4{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;font-weight:600}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+footer ul a{font-size:0.875rem;color:rgba(255,255,255,0.45);transition:color 0.2s}
+footer ul a:hover{color:var(--orange)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;font-size:0.78rem;color:rgba(255,255,255,0.25);
+}
+.footer-bottom a:hover{color:rgba(255,255,255,0.6)}
+
+/* ── WA FLOAT ── */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:200;
+  width:54px;height:54px;border-radius:50%;background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:all 0.25s;
+}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:26px;height:26px;fill:#fff}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}.rd4{transition-delay:0.4s}
+
+/* HERO ENTRY */
+.hero-content>*{opacity:0;transform:translateY(20px);animation:hIn 0.8s var(--ease) forwards}
+.hero-content>*:nth-child(1){animation-delay:0.1s}
+.hero-content>*:nth-child(2){animation-delay:0.2s}
+.hero-content>*:nth-child(3){animation-delay:0.3s}
+.hero-content>*:nth-child(4){animation-delay:0.4s}
+.hero-content>*:nth-child(5){animation-delay:0.5s}
+.hero-visual{opacity:0;animation:hIn 1s var(--ease) 0.4s forwards}
+@keyframes hIn{to{opacity:1;transform:none}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .servicos-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2.5rem}
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem}
+  .hero-visual{display:none}
+  .sobre-grid,.contato-grid{grid-template-columns:1fr;gap:2.5rem}
+  .dif-grid{grid-template-columns:1fr 1fr}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proc-grid::before{display:none}
+  .nav-links,.btn-nav{display:none!important}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+}
+@media(max-width:600px){
+  .servicos-grid{grid-template-columns:1fr}
+  .dif-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .sobre-cards{grid-template-columns:1fr 1fr}
+  .hero-stats{flex-direction:column;gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">TA</div>
+    <div class="nav-logo-text">Trombetta<span>Automação Industrial</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="btn-nav">Solicitar orçamento</a>
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#sobre" class="mobile-link">Sobre</a>
+  <a href="#servicos" class="mobile-link">Serviços</a>
+  <a href="#processo" class="mobile-link">Processo</a>
+  <a href="#contato" class="mobile-link">Contato</a>
+  <a href="#contato" class="btn-nav">Solicitar orçamento</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="grid-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Automação Industrial de Alta Performance</div>
+      <h1>Soluções em <em>Automação</em> que transformam sua indústria</h1>
+      <p class="hero-sub">Mais de 15 anos desenvolvendo sistemas de controle e monitoramento industrial personalizados. Atuação em todo o Brasil e na Argentina.</p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">Solicitar orçamento</a>
+        <a href="#servicos" class="btn-ghost">Ver serviços</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">15<em>+</em></div><div class="lbl">anos de mercado</div></div>
+        <div class="hero-stat"><div class="num">200<em>+</em></div><div class="lbl">projetos entregues</div></div>
+        <div class="hero-stat"><div class="num">2</div><div class="lbl">países atendidos</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-box">
+        <div class="hv-title">Status dos sistemas monitorados</div>
+        <div class="hv-items">
+          <div class="hv-item"><div class="hv-dot green"></div><div class="hv-line"><strong>Linha de produção A</strong><span>Operacional</span></div></div>
+          <div class="hv-item"><div class="hv-dot green"></div><div class="hv-line"><strong>Sistema de pesagem</strong><span>98.7% eficiência</span></div></div>
+          <div class="hv-item"><div class="hv-dot orange"></div><div class="hv-line"><strong>Retrofit linha B</strong><span>Em manutenção</span></div></div>
+          <div class="hv-item"><div class="hv-dot green"></div><div class="hv-line"><strong>CLP – Setor 3</strong><span>Programado</span></div></div>
+          <div class="hv-item"><div class="hv-dot green"></div><div class="hv-line"><strong>Monitoramento IHM</strong><span>Ativo</span></div></div>
+        </div>
+      </div>
+      <div class="hero-float">
+        <div class="f-val">↑ 34%</div>
+        <div class="f-lbl">Ganho médio de eficiência</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="eyebrow">Quem somos</p>
+      <h2 class="section-title">Engenharia e <em>inovação</em> a serviço da indústria</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="sobre-grid">
+      <div class="reveal sobre-visual">
+        <span class="sobre-tag">Desde 2009</span>
+        <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" width="140" height="140">
+          <rect x="20" y="50" width="100" height="70" rx="4" stroke-width="2"/>
+          <rect x="35" y="30" width="70" height="30" rx="4" stroke-width="2"/>
+          <circle cx="70" cy="45" r="6" stroke-width="2"/>
+          <line x1="50" y1="80" x2="90" y2="80" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="95" x2="80" y2="95" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="30" cy="80" r="6" stroke-width="2"/>
+          <circle cx="110" cy="80" r="6" stroke-width="2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="reveal">
+          <p class="eyebrow">Trombetta Automação</p>
+          <h3 class="section-title" style="font-size:1.75rem;text-transform:none;font-weight:600">Especialistas em automação há mais de 15 anos</h3>
+        </div>
+        <div class="reveal rd1">
+          <p class="sobre-text">Somos especialistas em automação industrial, com projetos implantados em diversos estados do Brasil e também na Argentina. Oferecemos soluções personalizadas para otimizar a produção, impulsionar a eficiência e promover o crescimento das indústrias de todos os setores.</p>
+          <p class="sobre-text">Com foco na inovação, projetamos sistemas de controle e monitoramento de equipamentos industriais sempre adequados às mais modernas soluções, com suporte contínuo e equipe especializada.</p>
+          <div class="sobre-pills">
+            <span class="pill">Indústria 4.0</span><span class="pill">CLP / SCADA</span>
+            <span class="pill">IHM</span><span class="pill">Redes industriais</span>
+            <span class="pill">NR10 / NR12</span><span class="pill">Retrofit</span>
+          </div>
+        </div>
+        <div class="sobre-cards reveal rd2">
+          <div class="sobre-card"><div class="num">15+</div><div class="lbl">anos de experiência</div></div>
+          <div class="sobre-card"><div class="num">200+</div><div class="lbl">projetos entregues</div></div>
+          <div class="sobre-card"><div class="num">2</div><div class="lbl">países atendidos</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="difs" id="diferenciais">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto">
+      <p class="eyebrow" style="justify-content:center">Nossos diferenciais</p>
+      <h2 class="section-title">Por que escolher a <em>Trombetta?</em></h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card reveal">
+        <div class="dif-icon"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke-width="1.5"/><path d="M8 13h10M13 8l5 5-5 5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Atendimento Internacional</h3>
+        <p>Experiência com projetos no Brasil e na Argentina, com equipe preparada para atender clientes de diferentes países e culturas industriais.</p>
+      </div>
+      <div class="dif-card reveal rd1">
+        <div class="dif-icon"><svg viewBox="0 0 26 26" fill="none"><rect x="4" y="4" width="18" height="18" rx="3" stroke-width="1.5"/><path d="M9 13l3 3 5-5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Projeto Sob Medida</h3>
+        <p>Nenhuma indústria é igual. Desenvolvemos soluções 100% personalizadas, do diagnóstico ao acompanhamento pós-implantação.</p>
+      </div>
+      <div class="dif-card reveal rd2">
+        <div class="dif-icon"><svg viewBox="0 0 26 26" fill="none"><path d="M13 3v4M13 19v4M3 13h4M19 13h4" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="13" r="5" stroke-width="1.5"/></svg></div>
+        <h3>Agilidade na Produção</h3>
+        <p>Soluções que reduzem tempo de parada, aumentam throughput e garantem maior previsibilidade operacional na sua planta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos" id="servicos">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="eyebrow">O que fazemos</p>
+      <h2 class="section-title">Principais <em>serviços</em></h2>
+      <div class="divider"></div>
+      <p style="color:var(--text-light);font-size:0.95rem;max-width:500px">As melhores e mais atuais tecnologias trabalhando a favor do seu crescimento</p>
+    </div>
+    <div class="servicos-grid">
+      <div class="srv-card reveal">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><rect x="8" y="8" width="16" height="16" rx="2" stroke-width="1.5"/><rect x="32" y="8" width="16" height="16" rx="2" stroke-width="1.5"/><rect x="8" y="32" width="16" height="16" rx="2" stroke-width="1.5"/><rect x="32" y="32" width="16" height="16" rx="2" stroke-width="1.5"/><path d="M24 16h8M24 40h8M16 24v8M40 24v8" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>Indústria 4.0</h3><p>Integração de sistemas, IoT industrial e digitalização da produção.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal rd1">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="16" stroke-width="1.5"/><circle cx="28" cy="28" r="4" stroke-width="1.5"/><path d="M28 12v4M28 40v4M12 28h4M40 28h4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>Sistema de Posição</h3><p>Controle preciso de posicionamento em equipamentos industriais.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal rd2">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><rect x="16" y="28" width="24" height="16" rx="2" stroke-width="1.5"/><path d="M20 28V20a8 8 0 0 1 16 0v8" stroke-width="1.5" stroke-linecap="round"/><circle cx="28" cy="36" r="3" stroke-width="1.5"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>Sistema de Pesagem</h3><p>Automação e controle de pesagem com alta precisão.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal rd3">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><rect x="12" y="16" width="32" height="24" rx="3" stroke-width="1.5"/><path d="M20 28l4 4 8-8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>Programação CLP</h3><p>Desenvolvimento e otimização de lógicas de controle programável.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><path d="M12 40l8-8 8 8 8-8 8 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="10" y="14" width="36" height="22" rx="2" stroke-width="1.5"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>Comércio de Materiais</h3><p>Fornecimento de componentes elétricos e eletrônicos industriais.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal rd1">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><path d="M14 42V28l14-14 14 14v14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="22" y="32" width="12" height="10" stroke-width="1.5"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>Retrofit Industrial</h3><p>Modernização de máquinas e equipamentos com novas tecnologias.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal rd2">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><path d="M28 10v10M10 28h10M28 46v-10M46 28h-10" stroke-width="1.5" stroke-linecap="round"/><circle cx="28" cy="28" r="8" stroke-width="1.5"/><circle cx="28" cy="28" r="3" stroke-width="1.5"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>NR10 e NR12</h3><p>Adequação de instalações e máquinas às normas de segurança.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+      <div class="srv-card reveal rd3">
+        <div class="srv-img"><svg viewBox="0 0 56 56" fill="none"><rect x="10" y="18" width="36" height="24" rx="3" stroke-width="1.5"/><path d="M18 30h4l4-6 4 12 4-6h4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="srv-stripe"></div>
+        <div class="srv-body"><h3>SCADA e IHM</h3><p>Supervisão, controle e interface homem-máquina avançados.</p><span class="srv-link">Saiba mais →</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="processo" id="processo">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto">
+      <p class="eyebrow" style="justify-content:center">Como trabalhamos</p>
+      <h2 class="section-title">Nosso <em>processo</em></h2>
+      <div class="divider" style="margin:1.5rem auto"></div>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-item reveal active">
+        <div class="proc-num">01</div>
+        <h3>Diagnóstico</h3>
+        <p>Análise detalhada do processo atual e levantamento de necessidades com sua equipe.</p>
+      </div>
+      <div class="proc-item reveal rd1">
+        <div class="proc-num">02</div>
+        <h3>Projeto</h3>
+        <p>Desenvolvimento da solução customizada: arquitetura, programação e documentação.</p>
+      </div>
+      <div class="proc-item reveal rd2">
+        <div class="proc-num">03</div>
+        <h3>Implantação</h3>
+        <p>Instalação, configuração e testes na planta industrial com acompanhamento dedicado.</p>
+      </div>
+      <div class="proc-item reveal rd3">
+        <div class="proc-num">04</div>
+        <h3>Suporte</h3>
+        <p>Treinamento, documentação completa e suporte técnico contínuo pós-implantação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clientes" id="clientes">
+  <div class="section-inner" style="padding-bottom:4rem">
+    <div class="reveal" style="text-align:center">
+      <p class="eyebrow" style="justify-content:center">Clientes</p>
+      <h2 class="section-title">Quem já confia na <em>Trombetta</em></h2>
+    </div>
+    <div class="clients-wrap reveal">
+      <div class="clients-track">
+        <div class="client-logo">BRF</div><div class="client-logo">Frimesa</div>
+        <div class="client-logo">Copacol</div><div class="client-logo">JBS</div>
+        <div class="client-logo">Cooperativa Sul</div><div class="client-logo">Lar Coop.</div>
+        <div class="client-logo">Aurora</div><div class="client-logo">Sadia</div>
+        <div class="client-logo">BRF</div><div class="client-logo">Frimesa</div>
+        <div class="client-logo">Copacol</div><div class="client-logo">JBS</div>
+        <div class="client-logo">Cooperativa Sul</div><div class="client-logo">Lar Coop.</div>
+        <div class="client-logo">Aurora</div><div class="client-logo">Sadia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos" id="depoimentos">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <p class="eyebrow" style="justify-content:center">Depoimentos</p>
+      <h2 class="section-title">O que nossos <em>clientes</em> dizem</h2>
+      <div class="divider" style="margin:1.5rem auto"></div>
+    </div>
+    <div class="dep-carousel reveal">
+      <div class="dep-track" id="dep-track">
+        <div class="dep-card"><div class="dep-inner"><div class="dep-stripe"></div><div class="dep-stars">★★★★★</div><p class="dep-text">"A Trombetta entendeu exatamente o que precisávamos. O sistema de pesagem automatizado reduziu nosso tempo de ciclo em 40% e praticamente eliminou os erros de processo. Parceria de longo prazo."</p><div class="dep-author"><div class="dep-avatar">RF</div><div class="dep-name"><strong>R. Ferreira</strong><span>Gerente de Produção – Cooperativa Agroindustrial</span></div></div></div></div>
+        <div class="dep-card"><div class="dep-inner"><div class="dep-stripe"></div><div class="dep-stars">★★★★★</div><p class="dep-text">"Fizemos o retrofit completo de três linhas. O resultado foi uma máquina nova com custo de 30% do que seria a compra de equipamento novo. Recomendo sem hesitar."</p><div class="dep-author"><div class="dep-avatar">MS</div><div class="dep-name"><strong>M. Souza</strong><span>Diretor Industrial – Grupo Alimentício</span></div></div></div></div>
+        <div class="dep-card"><div class="dep-inner"><div class="dep-stripe"></div><div class="dep-stars">★★★★★</div><p class="dep-text">"A adequação às normas NR10 e NR12 foi feita com muita competência. Além de atender a legislação, aproveitamos para melhorar o layout de segurança de toda a planta."</p><div class="dep-author"><div class="dep-avatar">CL</div><div class="dep-name"><strong>C. Lima</strong><span>Coordenador de Segurança – Indústria de Embalagens</span></div></div></div></div>
+      </div>
+      <div class="dep-dots" id="dep-dots"></div>
+      <div class="dep-arrows"><button id="dep-prev">←</button><button id="dep-next">→</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="eyebrow">Fale conosco</p>
+      <h2 class="section-title">Pronto para <em>automatizar</em>?</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contato-grid">
+      <div class="contato-info reveal">
+        <h3>Vamos conversar sobre seu projeto</h3>
+        <p>Conte-nos seu desafio. Nossa equipe técnica analisa, propõe e implementa a solução mais eficiente para sua operação.</p>
+        <div class="c-items">
+          <div class="c-item"><div class="c-icon"><svg viewBox="0 0 18 18" fill="none"><path d="M15 11.5c-1 0-2-.2-2.9-.5a.9.9 0 0 0-1 .3l-1.3 1.7a11.7 11.7 0 0 1-5-5l1.7-1.3a.9.9 0 0 0 .3-1A9 9 0 0 1 6.5 3H3.8a.8.8 0 0 0-.8.8C3 11.6 6.4 15 12.2 15a.8.8 0 0 0 .8-.8V11.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>(46) 9971-1266</span></div>
+          <div class="c-item"><div class="c-icon"><svg viewBox="0 0 18 18" fill="none"><path d="M3 4h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" stroke-width="1.5"/><path d="M16 5l-7 5-7-5" stroke-width="1.5" stroke-linecap="round"/></svg></div><span>comercial@trombetta.tec.br</span></div>
+          <div class="c-item"><div class="c-icon"><svg viewBox="0 0 18 18" fill="none"><path d="M9 1.5A5.5 5.5 0 0 0 3.5 7c0 4 5.5 9.5 5.5 9.5S14.5 11 14.5 7A5.5 5.5 0 0 0 9 1.5z" stroke-width="1.5"/><circle cx="9" cy="7" r="2" stroke-width="1.5"/></svg></div><span>Pato Branco – PR, Brasil</span></div>
+        </div>
+        <div class="social-row">
+          <a href="https://wa.me/554699711266" target="_blank" class="social-btn" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke-width="1.5"/><circle cx="4" cy="4" r="2" stroke-width="1.5"/></svg></a>
+        </div>
+        <div class="map-wrapper">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114559.07396530696!2d-52.8325105072287!3d-26.197619633475313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e5533f62e22c55%3A0x74c614e61d62d7ce!2sPato%20Branco%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1703848827843!5m2!1spt-BR!2sbr" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização"></iframe>
+        </div>
+      </div>
+      <div class="reveal rd1">
+        <div class="form-box">
+          <div class="form-box-stripe"></div>
+          <form id="contact-form" novalidate>
+            <div class="f-grid">
+              <div class="f-group"><label for="nome">Nome</label><input type="text" id="nome" placeholder="Seu nome completo" autocomplete="name"><span class="ferr" id="nome-err">Informe seu nome.</span></div>
+              <div class="f-group"><label for="email">E-mail</label><input type="email" id="email" placeholder="empresa@email.com" autocomplete="email"><span class="ferr" id="email-err">Informe um e-mail válido.</span></div>
+              <div class="f-group"><label for="telefone">Telefone / WhatsApp</label><input type="tel" id="telefone" placeholder="(46) 99999-9999" autocomplete="tel"><span class="ferr" id="telefone-err">Informe seu telefone.</span></div>
+              <div class="f-group"><label for="empresa">Empresa</label><input type="text" id="empresa" placeholder="Nome da sua empresa"></div>
+              <div class="f-group f-full"><label for="servico">Serviço de interesse</label>
+                <select id="servico"><option value="">Selecione um serviço...</option><option>Indústria 4.0</option><option>Sistema de Posição</option><option>Sistema de Pesagem</option><option>Programação CLP</option><option>Comércio de Materiais</option><option>Retrofit Industrial</option><option>NR10 e NR12</option><option>SCADA e IHM</option><option>Outro / Não sei ainda</option></select>
+                <span class="ferr" id="servico-err">Selecione um serviço.</span></div>
+              <div class="f-group f-full"><label for="descricao">Descrição do projeto</label><textarea id="descricao" placeholder="Descreva sua necessidade brevemente..."></textarea></div>
+            </div>
+            <button type="submit" class="btn-submit" id="submit-btn">Enviar solicitação</button>
+          </form>
+          <div class="form-success" id="form-success">
+            <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke-width="2"/><path d="M18 30l9 9 15-16" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;text-transform:uppercase;color:var(--navy);margin-bottom:0.75rem">Solicitação enviada!</h3>
+            <p style="color:var(--text-light);font-size:0.95rem">Nossa equipe técnica entrará em contato em breve para discutir seu projeto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-brand">
+        <div class="logo"><div class="logo-icon">TA</div><div class="logo-text">Trombetta Automação</div></div>
+        <p>Soluções em automação industrial para quem busca eficiência, inovação e resultados reais. Brasil e Argentina.</p>
+        <div class="f-social">
+          <a href="https://wa.me/554699711266" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke-width="1.5"/><circle cx="4" cy="4" r="2" stroke-width="1.5"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Navegação</h4><ul><li><a href="#sobre">Sobre nós</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#processo">Nosso processo</a></li><li><a href="#depoimentos">Depoimentos</a></li><li><a href="#contato">Contato</a></li></ul></div>
+      <div><h4>Serviços</h4><ul><li><a href="#servicos">Indústria 4.0</a></li><li><a href="#servicos">Programação CLP</a></li><li><a href="#servicos">Retrofit Industrial</a></li><li><a href="#servicos">NR10 e NR12</a></li><li><a href="#servicos">SCADA / IHM</a></li></ul></div>
+      <div><h4>Contato</h4><ul><li><a href="tel:554699711266">(46) 9971-1266</a></li><li><a href="mailto:comercial@trombetta.tec.br">comercial@trombetta.tec.br</a></li><li><a href="#">Pato Branco – PR</a></li><li><a href="#">Política de privacidade</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Trombetta Automação. Todos os direitos reservados.</span>
+      <a href="#">Política de privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/554699711266" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+(function(){
+  var nav=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+  var ham=document.getElementById('hamburger'),mob=document.getElementById('mobile-menu');
+  ham.addEventListener('click',function(){
+    var o=ham.classList.toggle('open');
+    mob.classList.toggle('open',o);ham.setAttribute('aria-expanded',String(o));
+    document.body.style.overflow=o?'hidden':'';
+  });
+  document.querySelectorAll('.mobile-link,.mobile-menu .btn-nav').forEach(function(el){
+    el.addEventListener('click',function(){ham.classList.remove('open');mob.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';});
+  });
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  var po=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active');});},{threshold:0.5});
+  document.querySelectorAll('.proc-item').forEach(function(el){po.observe(el);});
+  var dt=document.getElementById('dep-track'),dd=document.getElementById('dep-dots'),cnt=dt.children.length,cur=0,aT;
+  for(var i=0;i<cnt;i++){var b=document.createElement('button');b.setAttribute('aria-label','Dep '+(i+1));dd.appendChild(b);}
+  function goTo(n){cur=(n+cnt)%cnt;dt.style.transform='translateX(-'+cur*100+'%)';dd.querySelectorAll('button').forEach(function(b,i){b.classList.toggle('active',i===cur);});}
+  goTo(0);
+  document.getElementById('dep-prev').addEventListener('click',function(){goTo(cur-1);rst();});
+  document.getElementById('dep-next').addEventListener('click',function(){goTo(cur+1);rst();});
+  function rst(){clearInterval(aT);aT=setInterval(function(){goTo(cur+1);},5500);}rst();
+  var form=document.getElementById('contact-form'),sbtn=document.getElementById('submit-btn'),succ=document.getElementById('form-success');
+  function ferr(id,s){var e=document.getElementById(id+'-err');e&&e.classList.toggle('show',s);var i=document.getElementById(id);i&&i.classList.toggle('error',s);}
+  function validate(){
+    var ok=true,n=document.getElementById('nome'),e=document.getElementById('email'),t=document.getElementById('telefone'),s=document.getElementById('servico');
+    if(!n.value.trim()||n.value.trim().length<2){ferr('nome',true);ok=false;}else ferr('nome',false);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim())){ferr('email',true);ok=false;}else ferr('email',false);
+    if(!t.value.trim()||t.value.trim().length<8){ferr('telefone',true);ok=false;}else ferr('telefone',false);
+    if(!s.value){ferr('servico',true);ok=false;}else ferr('servico',false);
+    return ok;
+  }
+  form.addEventListener('submit',function(ev){ev.preventDefault();if(!validate())return;sbtn.textContent='Enviando...';sbtn.disabled=true;setTimeout(function(){form.style.display='none';succ.classList.add('show');},1400);});
+  var tel=document.getElementById('telefone');
+  tel.addEventListener('input',function(){var v=tel.value.replace(/\D/g,'');if(v.length<=2)v='('+v;else if(v.length<=6)v='('+v.slice(0,2)+') '+v.slice(2);else if(v.length<=10)v='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else v='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7,11);tel.value=v;});
+})();
+</script>
+</body>
+</html>
